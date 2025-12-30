@@ -1,9 +1,12 @@
 # 🚗 Vietnamese License Plate Recognition System
 
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![YOLOv8](https://img.shields.io/badge/AI-YOLOv8-green?style=for-the-badge&logo=ultralytics&logoColor=white)](https://github.com/ultralytics/ultralytics)
+[![Streamlit](https://img.shields.io/badge/Demo-Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://license-plate-recognition-demo.streamlit.app)
+
 A high-performance Computer Vision system designed to detect and recognize Vietnamese license plates (1-line and 2-line formats) in real-time. This project combines **YOLOv8** for robust object detection with a custom **Image Processing Pipeline** and **EasyOCR** for accurate character recognition, accessible via an interactive Streamlit web interface.
 
-![Demo](https://via.placeholder.com/800x400?text=Place+Your+Demo+Screenshot+Here)
-*(Note: Please replace the link above with a screenshot of your actual running app)*
+> **🔴 LIVE DEMO:** [Click here to try the App](https://license-plate-recognition-demo.streamlit.app)
 
 ## 🚀 Key Features
 
@@ -29,28 +32,27 @@ License-Plate-Project/
 ```
 
 ## 🛠️ Tech Stack & Techniques
-1. Object Detection (The "Eyes")
-Model: YOLOv8 (You Only Look Once - version 8).
 
-Why: Chosen for its real-time speed and high accuracy (mAP) compared to traditional Haar Cascades or older YOLO versions.
+### 1. Object Detection (The "Eyes")
+* **Model:** YOLOv8 (You Only Look Once - version 8).
+* **Why Chosen:** It offers state-of-the-art real-time speed and high accuracy (mAP), significantly outperforming traditional methods like Haar Cascades or older YOLO versions.
 
-2. Image Processing Pipeline (The "Brain")
-Before feeding the license plate into the OCR engine, the image undergoes a strict mathematical transformation in core.py:
+### 2. Image Processing Pipeline (The "Brain")
+Before feeding the license plate into the OCR engine, the image undergoes a strict mathematical transformation in `core.py`:
 
-Bicubic Upscaling: Resizing the plate region (x2 scale) using bicubic interpolation to enhance low-resolution details.
+1.  **Bicubic Upscaling:**
+    * Resizes the plate region (x2 scale) using bicubic interpolation to enhance low-resolution details.
+2.  **Grayscale Conversion:**
+    * Reduces dimensionality (RGB -> Gray) to focus on pixel intensity.
+3.  **Gaussian Blur:**
+    * Removes high-frequency noise (grain) from the sensor.
+4.  **Adaptive Thresholding:**
+    * Converts the image to binary (Black/White) based on local pixel neighborhoods, making the system robust against uneven lighting and shadows.
 
-Grayscale Conversion: Reducing dimensionality (RGB -> Gray) to focus on intensity.
-
-Gaussian Blur: Removing high-frequency noise (grain) from the sensor.
-
-Adaptive Thresholding: Converting the image to binary (Black/White) based on local pixel neighborhoods, making it robust against uneven lighting and shadows.
-
-3. Optical Character Recognition (OCR)
-Library: EasyOCR.
-
-Architecture: CRNN (Convolutional Recurrent Neural Network).
-
-Post-processing: Text cleaning logic to filter noise and validate license plate format.
+### 3. Optical Character Recognition (OCR)
+* **Library:** EasyOCR.
+* **Architecture:** CRNN (Convolutional Recurrent Neural Network).
+* **Post-processing:** Implements heuristic logic to clean text, filter noise, and validate the standard Vietnamese license plate format.
 
 ## 📖 Installation & Usage
 1. Clone the repository
@@ -90,11 +92,8 @@ streamlit run app.py
 The application will launch automatically in your web browser at http://localhost:8501.
 
 ## 📝 Usage Guide
-Select Source: Choose between "Sample Data (Kaggle)" to use pre-loaded images or "Upload Image" to test with your own files.
+* Select Source: Choose between "Sample Data (Kaggle)" to use pre-loaded images or "Upload Image" to test with your own files.
 
-Run Detection: Click the primary button to trigger the pipeline.
+* Run Detection: Click the primary button to trigger the pipeline.
 
-View Results: The system will display the bounding box on the image and print the recognized character string.
-
-## 📄 License
-This project is for educational purposes as part of an AI/ML Engineering Portfolio.
+* View Results: The system will display the bounding box on the image and print the recognized character string.
